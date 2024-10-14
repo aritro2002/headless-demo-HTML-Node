@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Accept a payment</title>
+    <meta name="description" content="A demo of a payment on Hyperswitch" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="checkout.css" />
+    <script src="http://localhost:9050/HyperLoader.js"></script>
+    <script src="checkout.js" defer></script>
+  </head>
+  <body>
+    <div id="button-wrapper">
+      <button id="show-last-used-button" type="button">
+        Show Last Used Payment Method
+        <span id="show-last-used-spinner" class="spinner"></span>
+      </button>
+
+      <button id="confirm-last-payment-button" type="button">
+        Confirm Payment
+        <span id="confirm-last-payment-spinner" class="spinner"></span>
+      </button>
+    </div>
+
+    <div id="payment-message" class="hidden"></div>
+    <h2>Last Used Payment Method Info</h2>
+    <div id="payment-method-data" class="scrollable"></div>
+  </body>
+</html>

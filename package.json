@@ -1,0 +1,22 @@
+{
+  "name": "headless-demo",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@juspay-tech/hyperswitch-node": "^1.0.1",
+    "body-parser": "^1.20.3",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "node-fetch": "2.7.0",
+    "patch-package": "^8.0.0",
+    "prompt": "^1.3.0",
+    "prompt-sync": "^4.2.0"
+  }
+}

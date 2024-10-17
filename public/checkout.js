@@ -1,7 +1,8 @@
 // Hyper SDK initialization with the publishable key
-const hyper = Hyper("pk_snd_2a48f5ff08094e2d8064c59063adfeeb");
+const hyper = Hyper("pk_snd_3b33cd9404234113804aa1accaabe22f");
 
 let globalClient = "";
+let paymentSession = "";
 
 // Initialize payment and set up event listeners
 initializePayment();
@@ -12,6 +13,9 @@ checkStatus();
 async function initializePayment() {
   const clientSecret = await fetchClientSecret();
   globalClient = clientSecret;
+  paymentSession = hyper.initPaymentSession({
+    clientSecret: globalClient,
+  });
 }
 
 // Fetch client secret from backend API
@@ -67,12 +71,9 @@ async function showLastUsedPaymentMethod() {
 
 // Get the customer's last used payment method
 async function getCustomerLastUsedPaymentMethod() {
-  const paymentSession = await hyper.initPaymentSession({
-    clientSecret: globalClient,
-  });
   const paymentMethodSession =
     await paymentSession.getCustomerSavedPaymentMethods();
-  return await paymentMethodSession.getCustomerLastUsedPaymentMethodData();
+  return paymentMethodSession.getCustomerLastUsedPaymentMethodData();
 }
 
 // Display JSON data in a pre-formatted block
@@ -95,9 +96,6 @@ function escapeHTML(str) {
 
 // Confirm payment using the last used method
 async function confirmLastUsedPayment() {
-  const paymentSession = await hyper.initPaymentSession({
-    clientSecret: globalClient,
-  });
   const paymentMethodSession =
     await paymentSession.getCustomerSavedPaymentMethods();
 
@@ -127,6 +125,9 @@ async function checkStatus() {
   if (!clientSecret) return;
 
   globalClient = clientSecret;
+  paymentSession = await hyper.initPaymentSession({
+    clientSecret: globalClient,
+  });
   const { paymentIntent } = await hyper.retrievePaymentIntent(clientSecret);
 
   switch (paymentIntent.status) {
